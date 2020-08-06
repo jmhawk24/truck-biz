@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_restful import Api
 from resources.truck import Truck
+import requests
 from db import db
 
 app = Flask(__name__)
@@ -16,6 +17,11 @@ def create_tables():
 @app.route('/')
 def index():
     return render_template('index.html');
+
+@app.route('/api/<string:name>')
+def show_truck(name):
+    # result = requests.get('http://localhost:5000/trucks/name')
+    return render_template('index.html', someVar = name)
 
 api.add_resource(Truck, '/trucks/<string:name>')
 
